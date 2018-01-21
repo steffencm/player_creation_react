@@ -10,9 +10,16 @@ function ClassOverview(props){
             <div className="card">
                 <img className="card-img-top rounded-circle" src={placeholder} alt="Card image cap"/>
                 <div className="card-body">
-                <h5 className="card-title">{props.title}</h5>
-                <p className="card-text">{props.description}</p>
-                <a href="#" className="btn btn-primary">Create</a>
+                <h5 className="card-title">{props.classDetail.title}</h5>
+                <p className="card-text">{props.classDetail.description}</p>
+                <div className="row">
+                    <div className="col">
+                        <a href="#" className="btn btn-primary" onClick={() => props.onClick(props.classDetail.id)}>Select</a>
+                    </div>
+                    <div className="col">
+                        <a href="#" className="btn btn-primary">More Information</a>
+                    </div>
+                </div>
               </div>
             </div>
         </div>
@@ -20,10 +27,9 @@ function ClassOverview(props){
 }
 
 function ClassRow(props){
-    let classes = []
-    console.log(props);
+    let classes = [];
     props.rowClasses.forEach(function(element){
-        classes.push(ClassOverview(element))
+        classes.push(ClassOverview({classDetail: element, onClick: (classId) => props.onClick(classId)}));
     });
     return (
         <div className="row">{classes}</div>
@@ -48,11 +54,14 @@ class ClassChoice extends Component {
         let loops = Math.ceil(this.state.classes.length/4)
         let thisLoop = 0;
         for(let i = 0; i < loops; i++){
-            rows.push(ClassRow({rowClasses: this.state.classes.slice(thisLoop*i, thisLoop*i+3)}));
+            rows.push(ClassRow({rowClasses: this.state.classes.slice(thisLoop*i, thisLoop*i+3), onClick:(classId) => this.props.onClick(classId)}));
             thisLoop+=4;
         };
         return (
-            <div className="classGrid">{rows}</div>
+            <div className="classGrid jumbotron">
+            <h1 className="jumbotron-heading">Choose your class</h1>
+            {rows}
+            </div>
         );
 
 

@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "bootstrap": "^4.0.0",
+    "immutability-helper": "^2.6.4",
     "jquery": "^3.3.0",
     "popper": "^1.0.1",
     "popper.js": "^1.12.9",

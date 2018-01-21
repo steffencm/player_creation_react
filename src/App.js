@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ClassChoice from './ClassChoice';
 import LandingPage from './LandingPage';
+import update from 'immutability-helper';
 
 
 class App extends Component {
@@ -8,26 +9,35 @@ class App extends Component {
     constructor(props){
         super(props);
         this.state = {
-            workflowStage: "callToAction"
+            workflowStage: "callToAction",
+            player: {
+                class: null,
+            },
         }
     }
 
     renderContent(stage){
-        console.log(stage);
         switch(stage){
             case "callToAction":
                 return <LandingPage onClick={() => this.startWorkflow()}/>;
                 break;
             case "classSelection":
-                return <ClassChoice />;
+                return <ClassChoice onClick={(classId) => this.selectClass(classId)}/>;
                 break;
        }
    }
 
    startWorkflow(){
        this.setState({workflowStage: "classSelection"});
-       console.log(this.state.workflowStage);
    };
+
+   selectClass(classId){
+       const newState = update(this.state, {
+             player: {class: {$set: classId}},
+       });
+       this.setState(newState);
+       
+   }
 
     render(){
         return (

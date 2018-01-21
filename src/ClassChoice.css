@@ -37,3 +37,12 @@
 .row{
     padding: 10px 10px
 }
+
+.classGrid{
+    padding: 0px 0px 0px 0px !important;
+}
+
+.jumbotron-heading{
+    text-align: center;
+    padding: .5rem;
+}

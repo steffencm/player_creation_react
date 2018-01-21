@@ -6,34 +6,42 @@ export default function getAllClasses(){
     return [
         {
             title: "Fighter",
+            id: "fighter",
             description: placeholderdescription,
         },
         {
             title: "Bard",
+            id: "bard",
             description: placeholderdescription,
         },
         {
             title: "Wizard",
+            id: "wizard", 
             description: placeholderdescription,
         },
         {
             title: "Cleric",
+            id: "cleric",
             description: placeholderdescription,
         },
         {
             title: "Rogue",
+            id: "rogue",
             description: placeholderdescription,
         },
         {
             title: "Warlock",
+            id: "warlock",
             description: placeholderdescription,
         },
         {
             title: "Barbarian",
+            id: "barbarian",
             description: placeholderdescription,
         },
         {
             title: "Druid",
+            id: "druid",
             description: placeholderdescription,
         }
      ]
