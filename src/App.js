@@ -1,8 +1,33 @@
 import React, { Component } from 'react';
 import ClassChoice from './ClassChoice';
+import LandingPage from './LandingPage';
 
 
 class App extends Component {
+
+    constructor(props){
+        super(props);
+        this.state = {
+            workflowStage: "callToAction"
+        }
+    }
+
+    renderContent(stage){
+        console.log(stage);
+        switch(stage){
+            case "callToAction":
+                return <LandingPage onClick={() => this.startWorkflow()}/>;
+                break;
+            case "classSelection":
+                return <ClassChoice />;
+                break;
+       }
+   }
+
+   startWorkflow(){
+       this.setState({workflowStage: "classSelection"});
+       console.log(this.state.workflowStage);
+   };
 
     render(){
         return (
@@ -30,7 +55,7 @@ class App extends Component {
             </header>
 
             <main role="main" className="container">
-                <ClassChoice />
+                {this.renderContent(this.state.workflowStage)} 
             </main>
 
             <footer className="footer">

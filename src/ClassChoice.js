@@ -48,8 +48,6 @@ class ClassChoice extends Component {
         let loops = Math.ceil(this.state.classes.length/4)
         let thisLoop = 0;
         for(let i = 0; i < loops; i++){
-            console.log(thisLoop*i);
-            console.log(thisLoop*i+4);
             rows.push(ClassRow({rowClasses: this.state.classes.slice(thisLoop*i, thisLoop*i+3)}));
             thisLoop+=4;
         };
