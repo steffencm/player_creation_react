@@ -3,6 +3,7 @@ const placeholderdescription =
     "Placeholder description for all classes until I get less lazy and put this in the database"
 
 export default function getAllClasses(){
+    console.log("Getting All Classes");
     return [
         {
             title: "Fighter",

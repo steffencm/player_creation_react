@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import ClassChoice from './ClassChoice';
+import GenericCardChoice from './GenericCardChoice';
 import LandingPage from './LandingPage';
 import update from 'immutability-helper';
+import getAllClasses from './api/class.js'
+import getAllRaces from './api/race.js'
 
 
 class App extends Component {
@@ -21,17 +23,29 @@ class App extends Component {
             case "callToAction":
                 return <LandingPage onClick={() => this.startWorkflow()}/>;
                 break;
+            case "raceSelection":
+                return <GenericCardChoice onClick={(raceId) => this.selectRace(raceId)} choices={getAllRaces()} heading="Choose Your Race"/>;
+                break;
             case "classSelection":
-                return <ClassChoice onClick={(classId) => this.selectClass(classId)}/>;
+                return <GenericCardChoice onClick={(classId) => this.selectClass(classId)} choices={getAllClasses()} heading="Choose Your Class"/>;
                 break;
        }
    }
 
    startWorkflow(){
-       this.setState({workflowStage: "classSelection"});
+       this.setState({workflowStage: "raceSelection"});
    };
 
+   selectRace(raceId){
+       const newState = update(this.state, {
+             player: {race: {$set: raceId}},
+             workflowStage: {$set: "classSelection"}
+       });
+       this.setState(newState);
+   }
+
    selectClass(classId){
+       console.log("selecting class");
        const newState = update(this.state, {
              player: {class: {$set: classId}},
        });
@@ -51,7 +65,7 @@ class App extends Component {
                 <div className="collapse navbar-collapse" id="navbarCollapse">
                   <ul className="navbar-nav mr-auto">
                     <li className="nav-item active">
-                      <a className="nav-link" href="#">Create New Character <span class="sr-only">(current)</span></a>
+                      <a className="nav-link" href="#">Create New Character <span className="sr-only">(current)</span></a>
                     </li>
                     <li className="nav-item">
                       <a className="nav-link disabled" href="#">Saved Characters</a>
