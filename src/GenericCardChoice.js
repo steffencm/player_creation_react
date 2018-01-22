@@ -5,7 +5,7 @@ import './GenericCardChoice.css';
 
 function GenericCard(props){
     return (
-        <div className="col-4">
+        <div className="col">
             <div className="card">
                 <img className="card-img-top rounded-circle" src={placeholder} alt="Card image cap"/>
                 <div className="card-body">

@@ -4,6 +4,7 @@ import LandingPage from './LandingPage';
 import update from 'immutability-helper';
 import getAllClasses from './api/class.js'
 import getAllRaces from './api/race.js'
+import Player from './models/Player.js';
 
 
 class App extends Component {
@@ -12,13 +13,12 @@ class App extends Component {
         super(props);
         this.state = {
             workflowStage: "callToAction",
-            player: {
-                class: null,
-            },
+            player: new Player(),
         }
     }
 
     renderContent(stage){
+        console.log(this.state);
         switch(stage){
             case "callToAction":
                 return <LandingPage onClick={() => this.startWorkflow()}/>;
@@ -37,17 +37,18 @@ class App extends Component {
    };
 
    selectRace(raceId){
+       this.state.player.choices.race = raceId;
        const newState = update(this.state, {
-             player: {race: {$set: raceId}},
+             player: {$set: this.state.player},
              workflowStage: {$set: "classSelection"}
        });
        this.setState(newState);
    }
 
    selectClass(classId){
-       console.log("selecting class");
+       this.state.player.choices.class = classId;
        const newState = update(this.state, {
-             player: {class: {$set: classId}},
+             player: {$set: this.state.player},
        });
        this.setState(newState);
        
@@ -71,8 +72,8 @@ class App extends Component {
                       <a className="nav-link disabled" href="#">Saved Characters</a>
                     </li>
                   </ul>
-                  <form class="form-inline mt-2 mt-md-0">
-                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
+                  <form className="form-inline mt-2 mt-md-0">
+                     <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
                   </form>
                 </div>
               </nav>
