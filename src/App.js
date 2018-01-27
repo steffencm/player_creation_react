@@ -5,6 +5,7 @@ import update from 'immutability-helper';
 import getAllClasses from './api/class.js'
 import getAllRaces from './api/race.js'
 import Player from './models/Player.js';
+import PlayerOverview from './PlayerOverview.js'
 
 
 class App extends Component {
@@ -12,7 +13,7 @@ class App extends Component {
     constructor(props){
         super(props);
         this.state = {
-            workflowStage: "callToAction",
+            workflowStage: "raceSelection",
             player: new Player(),
         }
     }
@@ -28,6 +29,9 @@ class App extends Component {
                 break;
             case "classSelection":
                 return <GenericCardChoice onClick={(classId) => this.selectClass(classId)} choices={getAllClasses()} heading="Choose Your Class"/>;
+                break;
+            case "playertest":
+                return <PlayerOverview choices={this.state.player.choices} stats={this.state.player.stats}/>;
                 break;
        }
    }
@@ -49,6 +53,7 @@ class App extends Component {
        this.state.player.choices.class = classId;
        const newState = update(this.state, {
              player: {$set: this.state.player},
+             workflowStage: {$set: "playertest"},
        });
        this.setState(newState);
        
