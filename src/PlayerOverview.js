@@ -100,8 +100,11 @@ class PlayerChoices extends Component{
         let objValues = this.state.choices;
         Object.keys(this.state.choices).forEach(function(key,index) {
             console.log(objValues);
-            console.log(key);
-            choice_rows.push(ChoiceRow({title: key, choice: objValues[key]}));
+            let choice = "";
+            if(objValues[key]){
+                choice = objValues[key].title;
+            }
+            choice_rows.push(ChoiceRow({title: key, choice: choice}));
         });
         return(
             <div className="choices">

@@ -2,13 +2,14 @@
 class Player{
     
     constructor(){
+        //TODO figure out to make these internal id and display
         this.choices = {
-            "race": null,
-            "class": null,
-            "background": null,
-            "equipment": null,
-            "armour": null,
-       }
+            "Race": null,
+            "Class": null,
+            "Background": null,
+            "Equipment": null,
+            "Armour": null,
+       },
        this.stats = [
            {
                "id" : "strength",

@@ -13,7 +13,7 @@ function GenericCard(props){
                 <p className="card-text">{props.detail.description}</p>
                 <div className="row">
                     <div className="col">
-                        <a href="#" className="btn btn-primary" onClick={() => props.onClick(props.detail.id)}>Select</a>
+                        <a href="#" className="btn btn-primary" onClick={() => props.onClick(props.detail)}>Select</a>
                     </div>
                     <div className="col">
                         <a href="#" className="btn btn-primary">More Information</a>

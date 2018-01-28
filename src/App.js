@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
-import GenericCardChoice from './GenericCardChoice';
 import LandingPage from './LandingPage';
-import update from 'immutability-helper';
-import getAllClasses from './api/class.js'
-import getAllRaces from './api/race.js'
-import Player from './models/Player.js';
-import PlayerOverview from './PlayerOverview.js'
+import CreationWorkflow from './CreationWorkflow.js';
 
 
 class App extends Component {
@@ -13,51 +8,25 @@ class App extends Component {
     constructor(props){
         super(props);
         this.state = {
-            workflowStage: "raceSelection",
-            player: new Player(),
+            mainContentChoice: "callToAction",
         }
     }
 
     renderContent(stage){
         console.log(this.state);
-        switch(stage){
+        switch(this.state.mainContentChoice){
             case "callToAction":
-                return <LandingPage onClick={() => this.startWorkflow()}/>;
+                return <LandingPage onClick={() => this.startCreationWorkflow()}/>;
                 break;
-            case "raceSelection":
-                return <GenericCardChoice onClick={(raceId) => this.selectRace(raceId)} choices={getAllRaces()} heading="Choose Your Race"/>;
-                break;
-            case "classSelection":
-                return <GenericCardChoice onClick={(classId) => this.selectClass(classId)} choices={getAllClasses()} heading="Choose Your Class"/>;
-                break;
-            case "playertest":
-                return <PlayerOverview choices={this.state.player.choices} stats={this.state.player.stats}/>;
+            case "creationWorkflow":
+                return <CreationWorkflow />;
                 break;
        }
    }
 
-   startWorkflow(){
-       this.setState({workflowStage: "raceSelection"});
+   startCreationWorkflow(){
+       this.setState({mainContentChoice: "creationWorkflow"});
    };
-
-   selectRace(raceId){
-       this.state.player.choices.race = raceId;
-       const newState = update(this.state, {
-             player: {$set: this.state.player},
-             workflowStage: {$set: "classSelection"}
-       });
-       this.setState(newState);
-   }
-
-   selectClass(classId){
-       this.state.player.choices.class = classId;
-       const newState = update(this.state, {
-             player: {$set: this.state.player},
-             workflowStage: {$set: "playertest"},
-       });
-       this.setState(newState);
-       
-   }
 
     render(){
         return (
