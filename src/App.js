@@ -59,7 +59,7 @@ class App extends Component {
 
             <footer className="footer">
               <div className="container">
-                <span className="text-muted">Place sticky footer content here.</span>
+                <span className="text-muted">Steffen Studios - 2018</span>
               </div>
             </footer>
          </div>
